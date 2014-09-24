@@ -1,7 +1,7 @@
 {
-  "name": "flow-socket",
+  "name": "flow-tcp-client",
   "version": "0.0.0",
-  "description": "Flow socket.",
+  "description": "Factory for creating TCP clients.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
@@ -20,23 +20,26 @@
   "main": "./lib",
   "repository": {
     "type": "git",
-    "url": "git://github.com/flow-io/flow-socket.git"
+    "url": "git://github.com/flow-io/flow-tcp-client.git"
   },
   "keywords": [
     "stream",
     "flow",
-    "flow.io"
+    "flow.io",
+    "socket",
+    "client",
+    "tcp"
   ],
   "bugs": {
-    "url": "https://github.com/flow-io/flow-socket/issues"
+    "url": "https://github.com/flow-io/flow-tcp-client/issues"
   },
   "dependencies": {},
   "devDependencies": {
     "chai": "1.x.x",
-    "mocha": "1.x.x",
     "coveralls": "^2.11.1",
+    "event-stream": "^3.1.7",
     "istanbul": "^0.3.0",
-    "event-stream": "^3.1.7"
+    "mocha": "1.x.x"
   },
   "licenses": [
     {

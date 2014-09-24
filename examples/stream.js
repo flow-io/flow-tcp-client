@@ -4,7 +4,7 @@
 *
 *
 *	DESCRIPTION:
-*		- Demonstrates use of a flow TCP socket client to write data to a flow TCP socket server.
+*		- Demonstrates use of a flow TCP socket client to pipe data to a flow TCP socket server.
 *
 *
 *	NOTES:
@@ -32,6 +32,7 @@
 	// MODULES //
 
 	var net = require( 'net' ),
+		eventStream = require( 'event-stream' ),
 		createClient = require( './../lib' );
 
 
@@ -101,8 +102,6 @@
 
 		return;
 		
-		// LISTENERS //
-
 		function connect() {
 			client.connect();
 		}
@@ -113,22 +112,24 @@
 		}
 
 		function onConnect() {
+			var arr = new Array( numData ),
+				readStream;
+
+			// Create some data...
 			for ( var i = 0; i < numData; i++ ) {
-				write( i );
+				arr[ i ] = newLine();
 			}
-		}
 
-		// FUNCTIONS //
+			// Create a readable stream:
+			readStream = eventStream.readArray( arr );
 
-		function write( idx ) {
-			setTimeout( function onTimeout() {
-				if ( client.status() ) {
-					client.write( newLine(), onWrite );
-				}
-				if ( idx === numData-1 ) {
-					client.end();
-				}
-			}, 1000*idx );
+			// Bind a listener for when all data is written:
+			readStream.on( 'end', function onEnd() {
+				client.end();
+			});
+
+			// Pipe the data:
+			readStream.pipe( client.stream() );
 		}
 
 		function newLine() {
@@ -141,10 +142,6 @@
 			};
 
 			return JSON.stringify( data ) + '\n';
-		}
-
-		function onWrite() {
-			console.log( '...data written to socket...' );
 		}
 	} // end FUNCTION createConnection()
 
