@@ -78,11 +78,7 @@ Writes to a socket connection. If strict mode is `off`, no type checking of inpu
 
 ``` javascript
 var data = {
-		'value': [ Date.now(), Math.random() ],
-		'stats': {
-			'load': 83,
-			'mem': 0.34
-		}
+		'value': [ Date.now(), Math.random() ]
 	};
 
 data = JSON.stringify( data ) + '\n';
@@ -135,7 +131,7 @@ client.end();
 
 #### 'connect'
 
-The socket emits a `connect` event upon successfully establishing a socket connection. To register a listener,
+The client emits a `connect` event upon successfully establishing a socket connection. To register a listener,
 
 ``` javascript
 client.addListener( 'connect', function onConnect() {
@@ -146,7 +142,7 @@ client.addListener( 'connect', function onConnect() {
 
 #### 'error'
 
-The socket emits an `error` event upon encountering an error. To register a listener,
+The client emits an `error` event upon encountering an error. To register a listener,
 
 ``` javascript
 client.addListener( 'error', function onError( error ) {
@@ -158,7 +154,7 @@ client.addListener( 'error', function onError( error ) {
 
 #### 'close'
 
-The socket emits a `close` event when the other end of the connection closes the socket. To register a listener,
+The client emits a `close` event when the other end of the connection closes the socket. To register a listener,
 
 ``` javascript
 client.addListener( 'close', function onClose() {
@@ -173,7 +169,7 @@ client.addListener( 'close', function onClose() {
 
 #### 'warn'
 
-The socket emits a `warn` event when attempting to create a new socket connection when a connection already exists. To register a listener,
+The client emits a `warn` event when attempting to create a new socket connection when a connection already exists. To register a listener,
 
 ``` javascript
 client.addListener( 'warn', function onWarn( message ) {
